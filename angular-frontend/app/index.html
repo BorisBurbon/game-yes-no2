@@ -1,54 +1,119 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
 <head>
-<meta charset="utf-8">
-<title></title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
-<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-<!-- build:css styles/vendor.css -->
-<!-- bower:css -->
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-<!-- endbower -->
-<!-- endbuild -->
-<!-- build:css({.tmp,app}) styles/main.css -->
-<link rel="stylesheet" href="styles/main.css">
-<!-- endbuild -->
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
 </head>
 <body ng-app="chatApp">
-<h1>Angular Chatter</h1>
 
-<div class='container'>
-  <div ng-controller='SocketCtrl'>
-    You are known as: <span ng-bind="nickName"></span>.<br/>Change your nickname with <code>/nick [yourNewNick]</code>
-    <div class='row'>
-      <div class='col-md-9'>
-        <chat-box></chat-box>
-      </div>
-    </div>
-    <div class='row'>
-      &nbsp;
-    </div>
-    <div class='row'>
-      <div class='col-md-8'>
-        <form role='form' novalidate name='form'>
-          <div class='form-group'>
-            <input type='text' style='width: 80%'
-            required
-            ng-max='50'
-            ng-model='message'
-            focus>
-            <button class='btn btn-sm btn-primary'
-              ng-enable='form.$valid'
-              ng-click="sendMessage(message)">Send!</button>
-          </div>
+<div ng-include src="'views/header.html'"></div>
+
+
+
+<div class='container wrap' >
+    <div ng-controller="defaultCtrl">
+        <h1 class="text-center">Welcome to Game!</h1>
+        <form  name="myForm" class="main-form" novalidate ng-submit="addNewUser(newUser, myForm.$valid)">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="">Your name</label>
+                        <input name="userName" type="text" class="form-control" placeholder="name" required ng-model="newUser.name"/>
+                        <!--<div class="help-block">error</div>-->
+                        <div ng-show="showError" ng-bind-html="getError(myForm.userName.$error)">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="">Select role</label>
+                    <div class="radio-btn">
+                        <input type="radio" name="guess" id="yes" checked/>
+                        <input type="radio" name="guess" id="no" />
+                        <div class="switch">
+                            <label for="yes">Ask</label>
+                            <label for="no">Guess</label>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="btn btn-danger" type="submit">Go!</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="smile">
+                        <div class="error" ng-hide="myForm.userName.$invalid && myForm.userName.$dirty">
+                            <div class="smile__inner">
+                        </div>
+                        </div>
+                        <div class="error" ng-show="myForm.userName.$invalid && myForm.userName.$dirty">
+                            <div class="smile__inner error"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
-      </div>
     </div>
-  </div>
+
+    <div ng-controller='SocketCtrl'>
+        <p class="text-center">
+            You are known as: <span ng-bind="nickName"></span>.<br/>Change your nickname with <code>/nick
+            [yourNewNick]</code>
+        </p>
+
+        <div class='row'>
+            <div class='col-md-8 col-md-offset-2'>
+                <chat-box></chat-box>
+            </div>
+        </div>
+        <div class='row'>
+            &nbsp;
+        </div>
+        <div class='row'>
+            <div class='col-md-8 col-md-offset-2'>
+                <form role='form' novalidate name='form'>
+                    <div class='input-group'>
+                        <input class="form-control" type='text'
+                               required
+                               ng-max='50'
+                               ng-model='message'
+                               focus>
+                        <span class="input-group-btn">
+                          <button class='btn btn-success'
+                                  ng-enable='form.$valid'
+                                  ng-click="sendMessage(message)">Send!
+                          </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <hr/>
 
@@ -59,6 +124,7 @@
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/es5-shim/es5-shim.js"></script>
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="bower_components/json3/lib/json3.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -75,6 +141,7 @@
 <script src="scripts/services/socket.js"></script>
 <script src="scripts/services/messageformatter.js"></script>
 <script src="scripts/directives/chatbox.js"></script>
+<script src="scripts/directives/foms.js"></script>
 <!-- endbuild -->
 </body>
 </html>

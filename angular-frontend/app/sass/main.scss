@@ -1,0 +1,38 @@
+
+/***********************/
+/*      BASE STYLES    */
+
+@import "base/_base.scss";
+
+/***********************/
+/*        LAYOUT       */
+
+// HEADER
+@import "layout/_header.scss";
+
+// CONTENT
+@import "layout/_content.scss";
+
+
+//FOOTER
+@import "layout/_footer.scss";
+
+
+/***********************/
+/*       MODULES       */
+
+@import "modul/_slider.scss";
+
+@import "modul/_form.scss";
+
+@import "modul/_content.scss";
+
+@import "modul/_sidebar.scss";
+
+@import "modul/_stars.scss";
+
+@import "modul/_post.scss";
+
+
+
+

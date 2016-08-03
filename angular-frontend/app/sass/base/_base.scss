@@ -1,0 +1,33 @@
+@import "_variables.scss";
+@import "_mixins.scss";
+
+@import url(https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700);
+
+
+html {
+    
+}
+
+body {
+    font-family: 'Hind', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: $text;
+    background: rgba(0, 150, 136, 0.1);
+}
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+* {
+    outline: none !important;
+}
+
+a {
+    &:hover {
+        text-decoration: none;
+    }
+}
