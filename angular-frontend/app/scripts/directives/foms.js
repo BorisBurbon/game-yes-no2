@@ -8,6 +8,7 @@ angular.module('chatApp')
             else {
                 $scope.message = "Error";
                 $scope.showError = true;
+                $scope.classNames = "error";
             }
         }
 
@@ -15,12 +16,15 @@ angular.module('chatApp')
         // можно использовать методы подобные getError
         $scope.getError = function (error) {
            var mg = "<span class='error'><span class='text'>Поле не должно быть пустым</span></span>";
+            var smile = 11;
             if (angular.isDefined(error)) {
-                if (error.required) {
+                if (error.required && error) {
                     return mg;
                 }
                 else {
                     $scope.showError = true;
+                    $scope.classNames = "";
+
                 }
             }
         }

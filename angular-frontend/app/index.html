@@ -66,15 +66,21 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="smile">
-                        <div class="error" ng-hide="myForm.userName.$invalid && myForm.userName.$dirty">
-                            <div class="smile__inner">
+                    <!--<div class="smile">-->
+                        <!--<div class="error" ng-hide="myForm.userName.$invalid && myForm.userName.$dirty">-->
+                            <!--<div class="smile__inner">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="error" ng-show="myForm.userName.$invalid && myForm.userName.$dirty">-->
+                            <!--<div class="smile__inner error"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="error">
+                        <div class="smile">
+                            <div class="smile__inner" ng-class="classNames">
+                            </div>
                         </div>
-                        </div>
-                        <div class="error" ng-show="myForm.userName.$invalid && myForm.userName.$dirty">
-                            <div class="smile__inner error"></div>
-                        </div>
-                    </div>
+                     </div>
                 </div>
             </div>
         </form>
